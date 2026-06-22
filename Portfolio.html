@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Emme D. ~ Portfolio</title>
+<script>document.documentElement.classList.add("js");</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<script src="image-slot.js"></script>
+<style>
+:root {
+  --bg: #F4EFE6;
+  --bg-tint: #ECE5D6;
+  --fg: #1A1612;
+  --muted: #6B6258;
+  --line: #D9D0BE;
+  --accent: #7A4467;
+  --accent-soft: #D4B4C7;
+  --serif: "Instrument Serif", "Times New Roman", serif;
+  --sans: "Geist", -apple-system, sans-serif;
+  --mono: "Geist Mono", ui-monospace, monospace;
+  --max: 1280px;
+  --pad: clamp(24px, 5vw, 80px);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+::selection { background: var(--accent); color: var(--bg); }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+/* ── NAV ────────────────────────────────────────── */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px var(--pad);
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: border-color .3s;
+}
+.nav.scrolled { border-bottom-color: var(--line); }
+.nav-mark {
+  font-family: var(--serif);
+  font-size: 22px;
+  letter-spacing: -.01em;
+  display: flex; align-items: baseline; gap: 8px;
+}
+.nav-mark .dot {
+  display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent);
+  transform: translateY(-2px);
+}
+.nav-mark i { font-style: italic; color: var(--accent); }
+.nav-links {
+  display: flex; gap: 28px;
+  font-family: var(--mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.nav-links a { position: relative; padding: 4px 0; color: var(--muted); transition: color .2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--fg); }
+.nav-links a.active::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -2px;
+  height: 1px; background: var(--accent);
+}
+.nav-cta {
+  font-family: var(--mono); font-size: 12px;
+  text-transform: uppercase; letter-spacing: .08em;
+  padding: 8px 14px; border: 1px solid var(--fg); border-radius: 999px;
+  transition: background .2s, color .2s;
+}
+.nav-cta:hover { background: var(--fg); color: var(--bg); }
+
+@media (max-width: 720px) { .nav-links { display: none; } }
+
+/* ── HERO with scattered stickers ─────────────── */
+.hero {
+  position: relative;
+  padding: clamp(60px, 9vh, 100px) var(--pad) clamp(60px, 8vh, 100px);
+  max-width: var(--max);
+  margin: 0 auto;
+  min-height: 90vh;
+}
+.hero-stage {
+  position: relative;
+  z-index: 2;
+}
+.hero-meta {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--mono); font-size: 12px;
+  text-transform: uppercase; letter-spacing: .1em;
+  color: var(--muted);
+  margin-bottom: 36px;
+}
+.hero-meta .pulse {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 0 0 rgba(74, 222, 128, .6);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, .6); }
+  70% { box-shadow: 0 0 0 8px rgba(74, 222, 128, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(40px, 6vw, 90px);
+  line-height: .95;
+  letter-spacing: -.02em;
+  margin-bottom: 32px;
+  max-width: 820px;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+.hero-sub {
+  max-width: 540px;
+  font-size: clamp(18px, 1.6vw, 22px);
+  line-height: 1.4;
+  color: var(--fg);
+}
+.hero-sub em { font-family: var(--serif); font-style: italic; font-size: 1.15em; color: var(--accent); }
+
+/* Scattered sticker placeholders */
+.sticker {
+  position: absolute;
+  z-index: 1;
+  background: #fff;
+  padding: 12px;
+  box-shadow: 0 14px 36px rgba(26, 22, 18, .14), 0 2px 6px rgba(26, 22, 18, .06);
+  border-radius: 4px;
+  transition: transform .6s cubic-bezier(.22, 1, .36, 1);
+}
+.sticker:hover { transform: scale(1.04) rotate(0deg) !important; z-index: 10; }
+.sticker image-slot {
+  display: block;
+  background: var(--bg-tint);
+}
+.sticker .sticker-tape {
+  position: absolute;
+  top: -10px; left: 50%; transform: translateX(-50%) rotate(-3deg);
+  width: 50px; height: 16px;
+  background: color-mix(in srgb, var(--accent) 40%, transparent);
+  border-radius: 2px;
+  opacity: .6;
+}
+
+.sticker-1 { top: 4%; right: 8%; transform: rotate(8deg); }
+.sticker-1 image-slot { width: 150px; height: 180px; }
+.sticker-2 { top: 28%; right: 2%; transform: rotate(-6deg); }
+.sticker-2 image-slot { width: 130px; height: 130px; border-radius: 50%; }
+.sticker-3 { top: 72%; right: 14%; transform: rotate(4deg); }
+.sticker-3 image-slot { width: 170px; height: 130px; }
+.sticker-4 { top: 75%; left: 0%; transform: rotate(-5deg); }
+.sticker-4 image-slot { width: 200px; height: 130px; }
+.sticker-5 { top: 80%; left: 32%; transform: rotate(7deg); }
+.sticker-5 image-slot { width: 160px; height: 110px; }
+
+/* Decorative star */
+.deco-star {
+  position: absolute;
+  width: 80px; height: 80px;
+  color: var(--accent);
+  opacity: .9;
+  z-index: 0;
+}
+.deco-star.s1 { top: 18%; right: 32%; transform: rotate(15deg); }
+.deco-star.s2 { bottom: 18%; left: 18%; transform: rotate(-12deg); width: 50px; height: 50px; }
+.deco-blob {
+  position: absolute;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
+  filter: blur(20px);
+  z-index: 0;
+  opacity: .5;
+}
+.deco-blob.b1 { top: -20px; right: 20%; }
+.deco-blob.b2 { bottom: 10%; left: 30%; }
+
+@media (max-width: 900px) {
+  .sticker { display: none; }
+  .sticker.sticker-1, .sticker.sticker-3 { display: block; }
+  .sticker-1 { top: -10px; right: 4%; }
+  .sticker-1 image-slot { width: 100px; height: 120px; }
+  .sticker-3 { top: auto; bottom: 12%; right: 4%; }
+  .sticker-3 image-slot { width: 120px; height: 90px; }
+  .deco-star { width: 40px; height: 40px; }
+}
+
+/* ── SECTIONS ───────────────────────────────────── */
+section {
+  padding: clamp(60px, 12vh, 90px) var(--pad);
+  max-width: var(--max);
+  margin: 0 auto;
+  scroll-margin-top: 70px;
+}
+.section-head {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 60px;
+  margin-bottom: 60px;
+  align-items: start;
+}
+.section-num {
+  font-family: var(--mono); font-size: 12px;
+  text-transform: uppercase; letter-spacing: .1em;
+  color: var(--muted);
+}
+.section-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(34px, 5vw, 60px);
+  line-height: 1;
+  letter-spacing: -.02em;
+}
+.section-title em { font-style: italic; color: var(--accent); }
+@media (max-width: 720px) {
+  .section-head { grid-template-columns: 1fr; gap: 16px; }
+}
+
+/* ── ABOUT ──────────────────────────────────────── */
+.about-prose {
+  font-family: var(--serif);
+  font-size: clamp(20px, 2.6vw, 25px);
+  line-height: 1.3;
+  letter-spacing: -.01em;
+  max-width: 780px;
+}
+.about-prose p + p { margin-top: 20px; }
+.about-prose em { color: var(--accent); }
+.about-side-grid {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 60px;
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+}
+.about-side-grid .about-side dl { display: grid; gap: 18px; }
+.about-side-grid .about-side dt {
+  font-family: var(--mono); font-size: 11px;
+  text-transform: uppercase; letter-spacing: .1em;
+  color: var(--muted); margin-bottom: 2px;
+}
+.about-side-grid .about-side dd { font-size: 14px; }
+.about-stickers {
+  display: flex; flex-wrap: wrap; gap: 16px;
+  align-items: flex-start;
+}
+.about-stickers image-slot {
+  width: 160px; height: 120px;
+  background: var(--bg-tint);
+}
+.about-stickers .about-sticker-wrap {
+  padding: 8px;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(26, 22, 18, .12);
+  border-radius: 4px;
+}
+.about-stickers .about-sticker-wrap:nth-child(1) { transform: rotate(-3deg); }
+.about-stickers .about-sticker-wrap:nth-child(2) { transform: rotate(4deg); margin-top: 16px; }
+.about-stickers .about-sticker-wrap:nth-child(3) { transform: rotate(-2deg); }
+@media (max-width: 720px) {
+  .about-side-grid { grid-template-columns: 1fr; gap: 32px; }
+}
+
+/* ── EDUCATION TIMELINE (compact) ───────────────── */
+.timeline {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+.tl-row {
+  display: grid;
+  grid-template-columns: 120px 1fr auto;
+  gap: 40px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: baseline;
+}
+.tl-year {
+  font-family: var(--mono); font-size: 13px;
+  color: var(--muted);
+}
+.tl-main h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(22px, 2.2vw, 30px);
+  line-height: 1.15;
+  letter-spacing: -.01em;
+}
+.tl-main h3 em { font-style: italic; color: var(--accent); }
+.tl-place {
+  font-family: var(--mono); font-size: 11px;
+  text-transform: uppercase; letter-spacing: .08em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+@media (max-width: 720px) {
+  .tl-row { grid-template-columns: 1fr; gap: 6px; padding: 22px 0; }
+}
+
+/* ── WORK / EXPERIENCE ─────────────────────────── */
+.work {
+  display: grid;
+  gap: clamp(60px, 10vh, 120px);
+}
+.work-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 80px);
+  align-items: center;
+}
+.work-item:nth-child(even) .work-thumb-wrap { order: 2; }
+.work-thumb-wrap {
+  position: relative;
+}
+.work-thumb-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 12px -12px -12px 12px;
+  background: var(--accent-soft);
+  z-index: -1;
+  border-radius: 4px;
+  opacity: .4;
+}
+.work-thumb-wide {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--bg-tint);
+  border-radius: 4px;
+  min-height: 400px;
+  display: block;
+}
+.work-thumb-card {
+  width: 80%;
+  height: 600px;
+  max-height: 80vh;
+  object-fit: contain;
+}
+.work-card .work-thumb-wrap::after {
+    display: none;
+}
+.work-tag {
+  display: inline-block;
+  font-family: var(--mono); font-size: 11px;
+  text-transform: uppercase; letter-spacing: .1em;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.work-item h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(32px, 3.6vw, 48px);
+  line-height: 1.05;
+  letter-spacing: -.015em;
+  margin-bottom: 16px;
+}
+.work-item h3 em { font-style: italic; color: var(--accent); }
+.work-item p {
+  color: var(--muted); font-size: 16px; max-width: 480px;
+  margin-bottom: 20px;
+}
+.work-tools {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  font-family: var(--mono); font-size: 11px;
+  text-transform: uppercase; letter-spacing: .08em;
+}
+.work-tools span {
+  padding: 5px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+}
+.work-tools span {
+  padding: 5px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+}
+
+/* ── Rover multi-screen layout ──────────── */
+.work-rover .rover-screens {
+  display: grid;
+  gap: 14px;
+  position: relative;
+}
+.work-rover .rover-screens::after {
+  content: "";
+  position: absolute;
+  inset: 12px -12px -12px 12px;
+  background: var(--accent-soft);
+  z-index: -1;
+  border-radius: 4px;
+  opacity: .4;
+}
+.work-rover .rover-main image-slot {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: var(--bg-tint);
+  display: block;
+}
+.work-rover .rover-secondary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.work-rover .rover-secondary image-slot {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: var(--bg-tint);
+  display: block;
+}
+.work-rover .work-thumb-wrap::after { display: none; }
+
+@media (max-width: 800px) {
+  .work-item { grid-template-columns: 1fr; gap: 24px; }
+  .work-item:nth-child(even) .work-thumb-wrap { order: 0; }
+}
+
+/* ── SKILLS (toolbox) ───────────────────────────── */
+.skills-grid { display: grid; grid-template-columns: 200px 1fr; gap: 60px; }
+.skill-group { margin-bottom: 36px; }
+.skill-group:last-child { margin-bottom: 0; }
+.skill-group h4 {
+  font-family: var(--mono); font-size: 12px;
+  text-transform: uppercase; letter-spacing: .1em;
+  color: var(--muted);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 14px;
+  transition: all .2s;
+  cursor: default;
+}
+.chip:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+.chip.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.chip.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+@media (max-width: 720px) { .skills-grid { grid-template-columns: 1fr; gap: 24px; } }
+
+/* ── CONTACT (minimal) ──────────────────────────── */
+.contact {
+  position: relative;
+  padding: clamp(50px, 9vh, 120px) var(--pad) 60px;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.contact-stickers {
+  position: absolute;
+  top: clamp(80px, 12vh, 140px);
+  right: var(--pad);
+  display: flex; gap: 16px;
+}
+.contact-stickers .stk { padding: 8px; background: #fff; box-shadow: 0 10px 24px rgba(26, 22, 18, .12); border-radius: 4px; }
+.contact-stickers .stk:nth-child(1) { transform: rotate(-6deg); }
+.contact-stickers .stk:nth-child(2) { transform: rotate(5deg); margin-top: 24px; }
+.contact-stickers image-slot { width: 130px; height: 130px; background: var(--bg-tint); }
+.contact-headline {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(50px, 9vw, 120px);
+  line-height: .92;
+  letter-spacing: -.025em;
+  margin-bottom: 48px;
+  max-width: 900px;
+}
+.contact-headline em { font-style: italic; color: var(--accent); }
+.contact-actions {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 80px;
+}
+.contact-actions a.primary {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 18px 26px;
+  background: var(--fg); color: var(--bg);
+  border-radius: 999px;
+  font-family: var(--mono); font-size: 13px;
+  text-transform: uppercase; letter-spacing: .1em;
+  transition: background .2s, transform .2s;
+}
+.contact-actions a.primary:hover { background: var(--accent); transform: translateY(-2px); }
+.contact-actions a.primary .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); transition: background .2s; }
+.contact-actions a.primary:hover .dot { background: var(--bg); }
+.contact-actions a.secondary {
+  font-family: var(--mono); font-size: 12px;
+  text-transform: uppercase; letter-spacing: .1em;
+  color: var(--muted);
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  transition: color .2s, border-color .2s;
+}
+.contact-actions a.secondary:hover { color: var(--fg); border-color: var(--fg); }
+.footer-end {
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between;
+  font-family: var(--mono); font-size: 11px;
+  text-transform: uppercase; letter-spacing: .08em;
+  color: var(--muted);
+}
+@media (max-width: 800px) {
+  .contact-stickers { display: none; }
+  .footer-end { flex-direction: column; gap: 8px; }
+}
+
+/* ── TWEAKS PANEL ───────────────────────────────── */
+.tweaks-panel {
+  position: fixed; bottom: 24px; right: 24px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px;
+  z-index: 200;
+  width: 240px;
+  font-family: var(--mono);
+  font-size: 11px;
+  box-shadow: 0 12px 36px rgba(26, 22, 18, .12);
+  display: none;
+}
+.tweaks-panel.visible { display: block; }
+.tweaks-panel .tp-head {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 14px;
+  text-transform: uppercase; letter-spacing: .1em;
+}
+.tweaks-panel .tp-close {
+  cursor: pointer; background: none; border: none; color: var(--muted);
+  font-family: var(--mono); font-size: 14px;
+}
+.tweaks-panel .tp-group { margin-bottom: 14px; }
+.tweaks-panel .tp-group:last-child { margin-bottom: 0; }
+.tweaks-panel .tp-label {
+  text-transform: uppercase; letter-spacing: .1em;
+  color: var(--muted); margin-bottom: 8px;
+  display: block;
+}
+.tweaks-panel .swatches { display: flex; gap: 6px; }
+.tweaks-panel .swatch {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 2px solid transparent; cursor: pointer;
+}
+.tweaks-panel .swatch.active { border-color: var(--fg); }
+.tweaks-panel .tone-row { display: flex; gap: 6px; }
+.tweaks-panel .tone {
+  flex: 1; padding: 8px;
+  border: 1px solid var(--line); border-radius: 6px;
+  text-align: center; cursor: pointer;
+  text-transform: uppercase; letter-spacing: .08em;
+  font-size: 10px;
+  background: var(--bg); color: var(--fg);
+}
+.tweaks-panel .tone.active { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+</style>
+</head>
+<body data-screen-label="Portfolio Site">
+
+<!-- ── NAV ─────────────────────────────────────── -->
+<nav class="nav" id="nav">
+  <a href="#top" class="nav-mark"><span class="dot"></span>Emme <i>D.</i></a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#work">Work</a>
+    <a href="#skills">Skills</a>
+  </div>
+  <a href="#contact" class="nav-cta">Say hi ↗</a>
+</nav>
+
+<!-- ── HERO / ABOUT INTRO ──────────────────────── -->
+<header class="hero" id="top" data-screen-label="01 About">
+  <div class="deco-blob b1"></div>
+  <div class="deco-blob b2"></div>
+  <svg class="deco-star s1" viewBox="0 0 80 80" fill="currentColor" aria-hidden="true">
+    <path d="M40 0 L48 32 L80 40 L48 48 L40 80 L32 48 L0 40 L32 32 Z"/>
+  </svg>
+  <svg class="deco-star s2" viewBox="0 0 80 80" fill="currentColor" aria-hidden="true">
+    <path d="M40 0 L48 32 L80 40 L48 48 L40 80 L32 48 L0 40 L32 32 Z"/>
+  </svg>
+
+  <!-- Scattered sticker placeholders. Drop your own image into each. -->
+  <div class="sticker sticker-1">
+    <image-slot id="sticker-1" shape="rect" src="images/Sticker-1.JPEG" placeholder="Drop a sticker / Sonny Angel / fav object"></image-slot>
+  </div>
+  <div class="sticker sticker-2">
+    <image-slot id="sticker-2" shape="circle" src="images/Sticker-2.jpeg" placeholder="Round photo / matcha / lily"></image-slot>
+  </div>
+  <div class="sticker sticker-3">
+    <image-slot id="sticker-3" shape="rect" src="images/Sticker-3.png" placeholder="A UI screenshot or moodboard pic"></image-slot>
+  </div>
+  <div class="sticker sticker-4">
+    <image-slot id="sticker-4" shape="rect" src="images/Sticker-4.jpeg" placeholder="Ballet / fashion / make-up"></image-slot>
+  </div>
+  <div class="sticker sticker-5">
+    <image-slot id="sticker-5" shape="rect" src="images/Sticker-5.png" placeholder="Tiny accent pic"></image-slot>
+  </div>
+
+  <div class="hero-stage">
+    <div class="hero-meta">
+      <span class="pulse"></span>
+      Sydney · Bangkok · Open to internships
+    </div>
+    <h1>
+      Hi, I'm <em>Emme</em>.<br>
+      An interaction<br>
+      <em>designer</em> in&#8209;the&#8209;making.
+    </h1>
+  </div>
+</header>
+
+<!-- ── ABOUT SECTION ───────────────────────────── -->
+<section id="about" data-screen-label="01 About details">
+  <div class="section-head">
+    <div class="section-num">01 — About</div>
+    <h2 class="section-title">A <em>social butterfly</em> with a Figma file open.</h2>
+  </div>
+
+  <div class="about-prose">
+    <p>Greetings! I'm an interaction designer student based in Sydney with a passion for creative technology. I love turning ideas into interactive digital experiences that balance aesthetics. I get genuinely <em>excited</em> when a stranger says yes to a 30-minute research call. </p>
+    <p>With a three cultures background, I bring a unique perspective to my design work. Journeyed from Thailand to the UK and now Australia, I embrace diversity and inclusivity in my designs.</p>
+  </div>
+
+  <div class="about-side-grid">
+    <div class="about-side">
+      <dl>
+        <div><dt>Based in</dt><dd>Sydney 🇦🇺</dd></div>
+        <div><dt>From</dt><dd>Bangkok 🇹🇭</dd></div>
+        <div><dt>Languages</dt><dd>EN · TH · 中文</dd></div>
+        <div><dt>Off-hours</dt><dd>fashion, beauty, musical theatre, beach</dd></div>
+      </dl>
+    </div>
+    <div class="about-stickers">
+      <div class="about-sticker-wrap"><image-slot id="about-stk-1" shape="rounded" src="images/pic-1.jpg" radius="4" placeholder="Pic 1"></image-slot></div>
+      <div class="about-sticker-wrap"><image-slot id="about-stk-2" shape="rounded" src="images/pic-2.jpg" radius="4" placeholder="Pic 2"></image-slot></div>
+      <div class="about-sticker-wrap"><image-slot id="about-stk-3" shape="rounded" src="images/pic-3.jpg" radius="4" placeholder="Pic 3"></image-slot></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EDUCATION (compact) ─────────────────────── -->
+<section id="education" data-screen-label="02 Education">
+  <div class="section-head">
+    <div class="section-num">02 — Education</div>
+    <h2 class="section-title">A slightly <em>non&#8209;linear</em> route.</h2>
+  </div>
+  <div class="timeline">
+    <div class="tl-row">
+      <div class="tl-year">2025 — Now</div>
+      <div class="tl-main">
+        <h3>Bachelor of IT, <em>Interaction Design</em></h3>
+      </div>
+      <div class="tl-place">University of Technology Sydney, AUS</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-year">2022 — 2024</div>
+      <div class="tl-main">
+        <h3>BEng Engineering <em>Mathematics</em></h3>
+        <h6>Started my academic journey in STEM and Engineering before transitioning.</h6>
+      </div>
+      <div class="tl-place">University of Bristol, UK</div>
+  </div>
+</section>
+
+<!-- ── WORK / UI DESIGN ─────────────────────────── -->
+<section id="work" data-screen-label="03 Work">
+  <div class="section-head">
+    <div class="section-num">03 — Projects</div>
+    <h2 class="section-title">What I've <em>designed</em>.</h2>
+  </div>
+  <div class="work">
+
+     <article class="work-item work-card">
+      <div class="work-thumb-wrap">
+        <image-slot id="work-3" shape="rounded" radius="4" src="images/Trading Card.png" class="work-thumb-card" placeholder="Digital Trading Card UI"></image-slot>
+      </div>
+      <div class="work-body">
+        <span class="work-tag">Visual Design · Personal · 2026</span>
+        <h3>Digital <em>Trading Card</em> Interface</h3>
+        <p>Designed a collectible digital trading card interface inspired by retro gaming aesthetics. Focused on visual hierarchy, interaction design, and creating a playful user experience through pixel-art inspired UI elements.</p>
+        <div class="work-tools"><span>Figma</span><span>Visual Design</span><span>UI Design</span><span>Interaction Design</span></div>
+      </div>
+    </article>
+
+    <article class="work-item">
+      <div class="work-thumb-wrap">
+        <image-slot id="work-2" shape="rounded" radius="6" src="images/Frame-2.png" class="work-thumb-wide" placeholder="UI project screens"></image-slot>
+      </div>
+      <div class="work-body">
+        <span class="work-tag">UI · University · 2025</span>
+        <h3>An <em>UI App Prototype Design</em></h3>
+        <p>Designed an app concept to help busy university students make use of ingredients already available in their fridge. The solution recommends simple recipes based on available ingredients, provides guided cooking steps, and encourages healthier eating habits.</p>
+        <div class="work-tools"><span>Figma</span><span>Design system</span></div>
+      </div>
+    </article>
+
+    <article class="work-item work-rover">
+  <div class="rover-screens">
+    <div class="rover-main">
+      <image-slot id="work-1a" shape="rounded" radius="6" src="images/Mainscreen-1.PNG" class="rover-screen" placeholder="Main screen 1"></image-slot>
+    </div>
+    <div class="rover-secondary">
+      <image-slot id="work-1b" shape="rounded" radius="6" src="images/Mainscreen-2.PNG" class="rover-screen" placeholder="Main screen 2"></image-slot>
+      <image-slot id="work-1c" shape="rounded" radius="6" src="images/Monitor.PNG" class="rover-screen" placeholder="Portable monitor"></image-slot>
+    </div>
+  </div>
+  <div class="work-body">
+    <span class="work-tag">UX/UI · Client work · 2025</span>
+    <h3>Rover <em>control panel</em> UI</h3>
+    <p>An 8-week mentored program with UTS UXID Society for the UTS Rover Team. Interviewed operators, designed mission-critical interface screens across 3 displays — 2 main control views + portable monitors — and presented to engineers.</p>
+    <div class="work-tools"><span>Figma</span><span>User research</span><span>Prototyping</span><span>Multi-screen UI</span></div>
+  </div>
+</article>
+
+<h1 style="text-align: center; font-size: 28px; color: var(--muted); margin-top: 40px;">More projects coming soon...</h1>
+  </div>
+</section>
+
+<!-- ── SKILLS / TOOLBOX ────────────────────────── -->
+<section id="skills" data-screen-label="04 Skills">
+  <div class="section-head">
+    <div class="section-num">04 — Toolbox</div>
+    <h2 class="section-title">The <em>kit</em>.</h2>
+  </div>
+  <div class="skills-grid">
+    <div></div>
+    <div>
+      <div class="skill-group">
+        <h4>Design &amp; Research</h4>
+        <div class="chips">
+          <span class="chip primary">UX/UI Design</span>
+          <span class="chip primary">User Research</span>
+          <span class="chip primary">Prototyping</span>
+          <span class="chip">Human-centred design</span>
+          <span class="chip">Wireframing</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Tools</h4>
+        <div class="chips">
+          <span class="chip primary">Figma</span>
+          <span class="chip">VS Code</span>
+          <span class="chip">GitHub</span>
+          <span class="chip">LaTeX</span>
+          <span class="chip">Microsoft</span>
+          <span class="chip">Video editing</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Code</h4>
+        <div class="chips">
+          <span class="chip">HTML</span>
+          <span class="chip">Python</span>
+          <span class="chip">CSS</span>
+          <span class="chip">Arduino</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Soft</h4>
+        <div class="chips">
+          <span class="chip">Communication</span>
+          <span class="chip">Team collab</span>
+          <span class="chip">Adaptability</span>
+          <span class="chip">Cross-cultural</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT (minimal) ───────────────────────── -->
+<section class="contact" id="contact" data-screen-label="05 Contact">
+  <div class="contact-stickers">
+    <div class="stk"><image-slot id="contact-stk-1" shape="rounded" radius="4" src="images/PIP.png" alt="A last pic"></image-slot></div>
+    <div class="stk"><image-slot id="contact-stk-2" shape="circle" src="images/Flower7.png" alt="A round pic"></image-slot></div>
+  </div>
+  <h2 class="contact-headline">
+    Let's <em>talk</em>.
+  </h2>
+  <div class="contact-actions">
+    <a href="/cdn-cgi/l/email-protection#0867667e697a69383d486f65696164266b6765" class="primary">
+      <span class="dot"></span>
+      <span class="__cf_email__" >[onvara05@gmail.com]</span>
+    </a>
+    <a href="For internship Aus (1).pdf" download="Onvara-Dusitrochanavong-CV.pdf" class="secondary">Résumé (PDF) ↓</a>
+    <a href="https://www.linkedin.com/in/emme-d-5185722a9/" class="secondary">LinkedIn ↗</a>
+  </div>
+  <div class="footer-end">
+    <span>© 2026 Emme Dusit</span>
+  </div>
+</section>
+
+<!-- ── TWEAKS PANEL ────────────────────────────── -->
+<div class="tweaks-panel" id="tweaks">
+  <div class="tp-head">
+    <span>Tweaks</span>
+    <button class="tp-close" id="tp-close" aria-label="Close">✕</button>
+  </div>
+  <div class="tp-group">
+    <span class="tp-label">Accent</span>
+    <div class="swatches" id="accent-swatches"></div>
+  </div>
+  <div class="tp-group">
+    <span class="tp-label">Paper</span>
+    <div class="tone-row" id="tone-row">
+      <div class="tone" data-tone="cream">Cream</div>
+      <div class="tone" data-tone="cool">Cool</div>
+      <div class="tone" data-tone="ink">Ink</div>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const TWEAKS = /*EDITMODE-BEGIN*/{
+  "accent": "#7A4467",
+  "tone": "cream"
+}/*EDITMODE-END*/;
+
+const ACCENTS = [
+  { name: "Plum",       hex: "#7A4467" },
+  { name: "Terracotta", hex: "#C8553D" },
+  { name: "Forest",     hex: "#3F5D45" },
+  { name: "Ink",        hex: "#1F3A5F" },
+  { name: "Ochre",      hex: "#B8862A" }
+];
+
+const TONES = {
+  cream: { bg: "#F4EFE6", bgTint: "#ECE5D6", fg: "#1A1612", muted: "#6B6258", line: "#D9D0BE" },
+  cool:  { bg: "#F1F2F4", bgTint: "#E5E7EC", fg: "#1A1F26", muted: "#5E6772", line: "#D2D6DD" },
+  ink:   { bg: "#15140F", bgTint: "#1F1E18", fg: "#F0EBE0", muted: "#928974", line: "#33312A" }
+};
+
+const state = { ...TWEAKS };
+
+function mix(a, b, ratio) {
+  const pa = parseInt(a.slice(1), 16), pb = parseInt(b.slice(1), 16);
+  const ar = (pa >> 16) & 255, ag = (pa >> 8) & 255, ab = pa & 255;
+  const br = (pb >> 16) & 255, bg = (pb >> 8) & 255, bb = pb & 255;
+  const r = Math.round(ar + (br - ar) * ratio);
+  const g = Math.round(ag + (bg - ag) * ratio);
+  const b2 = Math.round(ab + (bb - ab) * ratio);
+  return `rgb(${r}, ${g}, ${b2})`;
+}
+
+function applyTweaks() {
+  const t = TONES[state.tone] || TONES.cream;
+  const r = document.documentElement;
+  r.style.setProperty("--bg", t.bg);
+  r.style.setProperty("--bg-tint", t.bgTint);
+  r.style.setProperty("--fg", t.fg);
+  r.style.setProperty("--muted", t.muted);
+  r.style.setProperty("--line", t.line);
+  r.style.setProperty("--accent", state.accent);
+  r.style.setProperty("--accent-soft", mix(state.accent, t.bg, 0.55));
+  document.querySelectorAll("#accent-swatches .swatch").forEach(sw => sw.classList.toggle("active", sw.dataset.hex === state.accent));
+  document.querySelectorAll("#tone-row .tone").forEach(t => t.classList.toggle("active", t.dataset.tone === state.tone));
+}
+
+function persistTweak(key, val) {
+  state[key] = val;
+  try { window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { [key]: val } }, '*'); } catch (e) {}
+  applyTweaks();
+}
+
+const swEl = document.getElementById("accent-swatches");
+ACCENTS.forEach(a => {
+  const el = document.createElement("div");
+  el.className = "swatch";
+  el.dataset.hex = a.hex;
+  el.style.background = a.hex;
+  el.title = a.name;
+  el.addEventListener("click", () => persistTweak("accent", a.hex));
+  swEl.appendChild(el);
+});
+document.querySelectorAll("#tone-row .tone").forEach(el => {
+  el.addEventListener("click", () => persistTweak("tone", el.dataset.tone));
+});
+
+const panel = document.getElementById("tweaks");
+window.addEventListener("message", (e) => {
+  if (!e.data || typeof e.data !== "object") return;
+  if (e.data.type === "__activate_edit_mode") panel.classList.add("visible");
+  if (e.data.type === "__deactivate_edit_mode") panel.classList.remove("visible");
+});
+document.getElementById("tp-close").addEventListener("click", () => {
+  panel.classList.remove("visible");
+  try { window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*'); } catch (e) {}
+});
+try { window.parent.postMessage({ type: '__edit_mode_available' }, '*'); } catch (e) {}
+
+applyTweaks();
+
+// ── Nav: scroll bg + active section ──
+const nav = document.getElementById("nav");
+const navLinks = document.querySelectorAll(".nav-links a");
+window.addEventListener("scroll", () => {
+  nav.classList.toggle("scrolled", window.scrollY > 30);
+});
+const sectionMap = new Map();
+navLinks.forEach(link => {
+  const id = link.getAttribute("href").slice(1);
+  const sec = document.getElementById(id);
+  if (sec) sectionMap.set(sec, link);
+});
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(en => {
+    if (en.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove("active"));
+      const link = sectionMap.get(en.target);
+      if (link) link.classList.add("active");
+    }
+  });
+}, { rootMargin: "-40% 0px -55% 0px" });
+sectionMap.forEach((_, sec) => navObserver.observe(sec));
+</script>
+</body>
+</html>
